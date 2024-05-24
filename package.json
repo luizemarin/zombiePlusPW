@@ -1,0 +1,12 @@
+{
+  "name": "zombiePlusPW",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/luizemarin/zombiePlusPW.git",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.12.12"
+  },
+  "scripts": {}
+}
