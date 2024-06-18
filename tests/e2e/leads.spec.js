@@ -1,11 +1,14 @@
 // @ts-check
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
+import { Toast } from '../pages/component';
 const { LandingPage } = require('../pages/landingPage');
 
 let landingPage;
+let toast;
 
 test.beforeEach(async ({ page }) => {
   landingPage = new LandingPage(page);
+  toast = new Toast(page);
 });
 
 test('Deve cadastrar um lead na fila de espera', async ({ page }) => {
@@ -19,7 +22,7 @@ test('Deve cadastrar um lead na fila de espera', async ({ page }) => {
   const message =
     'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!';
 
-  await landingPage.toastHaveText(message);
+  await toast.haveText(message);
 });
 
 test('Não deve cadastrar com email incorreto', async ({ page }) => {

@@ -1,4 +1,4 @@
-const { expect } = require('@playwright/test');
+import { expect } from '@playwright/test';
 
 export class LandingPage {
   constructor(page) {
@@ -25,13 +25,6 @@ export class LandingPage {
       .getByTestId('modal')
       .getByText('Quero entrar na fila!')
       .click();
-  }
-
-  async toastHaveText(message) {
-    const toast = this.page.locator('.toast');
-
-    await expect(toast).toHaveText(message);
-    await expect(toast).not.toBeVisible({ timeout: 5000 });
   }
 
   async alertHaveText(target) {
