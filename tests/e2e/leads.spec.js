@@ -1,5 +1,6 @@
 // @ts-check
-import { test, expect } from '@playwright/test';
+import { test, expect, request } from '@playwright/test';
+import { faker } from '@faker-js/faker';
 import { Toast } from '../pages/component';
 const { LandingPage } = require('../pages/landingPage');
 
@@ -12,15 +13,41 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Deve cadastrar um lead na fila de espera', async ({ page }) => {
+  const randomName = faker.person.fullName();
+  const randomEmail = faker.internet.email();
+
   await landingPage.visit();
   await landingPage.openLeadModal();
-  await landingPage.submitLeadForm(
-    'Adroaldo Jesualdo',
-    'adroaldo@jesualdo.com'
-  );
+  await landingPage.submitLeadForm(randomName, randomEmail);
 
   const message =
     'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!';
+
+  await toast.haveText(message);
+});
+
+test('Não deve cadastrar quando o emaiul já existe', async ({
+  page,
+  request,
+}) => {
+  const randomName = faker.person.fullName();
+  const randomEmail = faker.internet.email();
+
+  const newLead = await request.post('http://localhost:3333/leads', {
+    data: {
+      name: randomName,
+      email: randomEmail,
+    },
+  });
+
+  expect(newLead.ok()).toBeTruthy();
+
+  await landingPage.visit();
+  await landingPage.openLeadModal();
+  await landingPage.submitLeadForm(randomName, randomEmail);
+
+  const message =
+    'O endereço de e-mail fornecido já está registrado em nossa fila de espera.';
 
   await toast.haveText(message);
 });
