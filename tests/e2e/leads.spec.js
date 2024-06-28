@@ -15,7 +15,7 @@ test('Deve cadastrar um lead na fila de espera', async ({ page }) => {
   await page.toast.containText(message);
 });
 
-test('Não deve cadastrar quando o emaiul já existe', async ({
+test('Não deve cadastrar quando o e-mail já existe', async ({
   page,
   request,
 }) => {
