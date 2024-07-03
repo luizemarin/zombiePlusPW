@@ -1,9 +1,9 @@
 import { test as base, expect } from '@playwright/test';
 
-import { Login } from '../actions/login';
-import { Toast } from '../actions/component';
-import { Movies } from '../actions/movies';
-import { Leads } from '../actions/leads';
+import { Login } from './actions/login';
+import { Toast } from './actions/component';
+import { Movies } from './actions/movies';
+import { Leads } from './actions/leads';
 
 const test = base.extend({
   page: async ({ page }, use) => {
