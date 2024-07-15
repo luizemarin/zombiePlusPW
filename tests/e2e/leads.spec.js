@@ -10,9 +10,9 @@ test('Deve cadastrar um lead na fila de espera', async ({ page }) => {
   await page.leads.submitLeadForm(randomName, randomEmail);
 
   const message =
-    'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!';
+    'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato.';
 
-  await page.toast.containText(message);
+  await page.popup.haveText(message);
 });
 
 test('Não deve cadastrar quando o e-mail já existe', async ({
@@ -36,9 +36,9 @@ test('Não deve cadastrar quando o e-mail já existe', async ({
   await page.leads.submitLeadForm(randomName, randomEmail);
 
   const message =
-    'O endereço de e-mail fornecido já está registrado em nossa fila de espera.';
+    'Verificamos que o endereço de e-mail fornecido já consta em nossa lista de espera. Isso significa que você está um passo mais perto de aproveitar nossos serviços.';
 
-  await page.toast.containText(message);
+  await page.popup.haveText(message);
 });
 
 test('Não deve cadastrar com email incorreto', async ({ page }) => {
