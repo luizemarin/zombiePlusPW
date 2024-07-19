@@ -1,5 +1,10 @@
 import { test, expect } from '../support/index';
 import { faker } from '@faker-js/faker';
+import {executeSQL} from "../support/database";
+
+test.beforeAll(async () => {
+  await executeSQL('DELETE FROM leads');
+});
 
 test('Deve cadastrar um lead na fila de espera', async ({ page }) => {
   const randomName = faker.person.fullName();

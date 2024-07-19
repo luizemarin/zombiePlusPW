@@ -4,6 +4,7 @@ import { Login } from './actions/login';
 import { Popup } from './actions/component';
 import { Movies } from './actions/movies';
 import { Leads } from './actions/leads';
+import { TvShow } from './actions/tvshow';
 import { Api } from './api/index';
 
 const test = base.extend({
@@ -14,6 +15,7 @@ const test = base.extend({
     context['login'] = new Login(page);
     context['movies'] = new Movies(page);
     context['popup'] = new Popup(page);
+    context['tvshow'] = new TvShow(page);
 
     await use(context);
   },
